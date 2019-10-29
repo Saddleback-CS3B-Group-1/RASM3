@@ -46,8 +46,7 @@ _start:
 		bl putstring
 */
 		mov r2, #2
-		bl String_substring_2
-		bl free
+		bl String_charAt
 
 terminate:
 		mov r7, #1
