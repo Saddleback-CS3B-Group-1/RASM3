@@ -45,11 +45,8 @@ _start:
 		ldreq r1, =result_bad
 		bl putstring
 */
-		bl String_length
-		mov r3, r0
-		sub r3, #1
-		mov r2, #1
-		bl String_substring_1
+		mov r2, #2
+		bl String_substring_2
 		bl free
 
 terminate:
