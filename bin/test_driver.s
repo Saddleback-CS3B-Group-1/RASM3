@@ -1,6 +1,6 @@
 		      .data
 test_string1: .skip 512
-#test_string2: .skip 512
+test_string2: .skip 512
  ptr_string2: .word 0
 input_prompt: .asciz "Enter a string: "
  result_good: .asciz "Strings Match"
@@ -16,15 +16,15 @@ _start:
 		mov r2, #512
 		bl getstring
 
-/*  test driver for String_equals 
+#  test driver for String_equals 
 		ldr r1, =input_prompt
 		bl putstring
 
 		ldr r1, =test_string2
 		mov r2, #512
 		bl getstring
-*/
-/*
+
+
 		ldr r1, =test_string1
 		ldr r2, =test_string2
 
@@ -45,8 +45,9 @@ _start:
 		ldreq r1, =result_bad
 		bl putstring
 */
-		mov r2, #2
-		bl String_charAt
+		mov r3, #3
+		bl String_startsWith_1
+		
 
 terminate:
 		mov r7, #1
