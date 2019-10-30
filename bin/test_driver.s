@@ -45,8 +45,7 @@ _start:
 		ldreq r1, =result_bad
 		bl putstring
 */
-		mov r3, #3
-		bl String_startsWith_1
+		bl String_endsWith
 		
 
 terminate:
