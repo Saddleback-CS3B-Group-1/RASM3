@@ -23,8 +23,8 @@ replaceLoop:
 	beq	b done
         ldrb    r6, [r4], #1              @ Load first char from string1 into R5, increment our pointer
         cmp     r6, r2 
-	strbeq	r3, [r0], #1
-	strbne	r6, [r0], #1 
+	moveq	r6, r3
+	strb	r6, [r0], #1 
        	sub r5, #1
         b       replaceLoop            @ Branch to loop
 
