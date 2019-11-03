@@ -6,7 +6,7 @@ String_copy:
 		cmp r0, #0
 		beq terminate
 		mov r6, r0
-		add r0, #1
+		add r0, #3
 		mov r4, r1
 		bl malloc
 		mov r5, r0

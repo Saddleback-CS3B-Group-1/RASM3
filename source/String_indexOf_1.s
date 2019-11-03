@@ -14,10 +14,10 @@ loop:
 	moveq r5, #-1		@If null is found, set R2 to -1
 	beq	endLoop		@If null found, branch to end
 	cmp	r3, r2		@Compare string with desired char
-	beq	end1		@If desired char found, branch to end
+	beq	endLoop		@If desired char found, branch to end
 	add	r4, #1		@If not found, move to next char in string
 	add	r5, #1		@If not found, increment index by 1, keep moving
-	b	loop		
+	b loop		
 
 endLoop:
 	mov	r0, r5		@Move result into R0 for return

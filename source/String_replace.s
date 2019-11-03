@@ -15,8 +15,8 @@ String_replace:
 	mov	r1, r1
 	mov 	r2, r10
 	mov 	r3, r11	
-        ldr     r3, =ptrStr       	@ Load our pointer address into r4
-        str     r0, [r3]                     @ Save our pointer to new memory
+        ldr     r7, =ptrStr       	@ Load our pointer address into r4
+        str     r0, [r7]                     @ Save our pointer to new memory
 
 replaceLoop:
 	cmp 	r5, #0

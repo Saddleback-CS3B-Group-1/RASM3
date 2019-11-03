@@ -12,7 +12,7 @@ String_toUpperCase:
 			  mov r5, r0
 Upper_loop:
 			  cmp r6, #0
-			  beq l_loop_done
+			  beq Upper_loop_done
 			  mov r9, #0
               ldrb r7, [r4], #1
 			  cmp r7, #97
@@ -20,7 +20,7 @@ Upper_loop:
 			  cmp r7, #122
 			  addle r9, #1
 			  cmp r9, #2
-			  addeq r7, #32
+			  subeq r7, #32
 			  strb r7, [r5], #1
 			  sub r6, #1
 			  b Upper_loop
