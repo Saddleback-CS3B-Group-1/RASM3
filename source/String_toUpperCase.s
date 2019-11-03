@@ -1,41 +1,33 @@
-    .global String_toUpperCase
-        .data
-ptrStrToUpper:    .word   0
-        .text
+	.global String_toUpperCase
+	.extern malloc
+
 String_toUpperCase:
-        push    {R4-R11, LR}   	        
-        push    {R0}                    
-	ldr	R0, [R0]			
-        bl      String_length           
-        add     R0, #1                  
-        bl      malloc                  
-        ldr     R4, =ptrStrToUpper         
-        str     R0, [R4]                 
-        pop     {R0}                    
-	push	  {R0}			
-	ldr	R0, [R0]			
-        ldr     R4, [R4]                 
-loop:
-        ldrb    R5, [R0], #1              
-        cmp     R5, #0                   
-        beq     loopEnd                
-        cmp     R5, #'a'                 
-        blt     copy               
-        cmp     R5, #'z'                 
-        bgt     copy            
-        and     R5, #0xdf                
-copy:
-        strb    R5, [R4], #1              
-        b       loop               
-loopEnd:
-        strb    R5, [R4]                
-	pop	{R0}			
-	push	 {R0}			
-	ldr	R0, [R0]			
-	bl	free			
-	pop	{R0}			
-        ldr     R4, =ptrStrToUpper        
-        ldr     R4, [R4]                 
-	str	R4, [R0]			
-        pop     {R4-R11, LR}    	
-        bx      LR                    
+			  push {r4-r11,lr}
+			  mov r4, r1
+			  bl String_length
+			  mov r6, r0
+			  add r0, #1
+			  bl malloc
+			  mov r1, r4
+			  mov r5, r0
+Upper_loop:
+			  cmp r6, #0
+			  beq l_loop_done
+			  mov r9, #0
+              ldrb r7, [r4], #1
+			  cmp r7, #97
+			  addge r9, #1
+			  cmp r7, #122
+			  addle r9, #1
+			  cmp r9, #2
+			  addeq r7, #32
+			  strb r7, [r5], #1
+			  sub r6, #1
+			  b Upper_loop
+
+Upper_loop_done:
+			  mov r8, #0
+			  strb r8, [r5]
+			  pop {r4-r11,lr}
+			  bx lr
+			  .end                   
