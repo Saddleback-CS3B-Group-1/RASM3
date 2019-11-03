@@ -12,7 +12,7 @@ loop:
 	cmp	r3, #0		@First, check if the char is a null
 	moveq r2, #-1		@If null is found, set R2 to -1
 	beq	endLoop		@If null found, branch to end
-	cmp	r3, r1		@Compare string with desired char
+	cmp	r3, r0		@Compare string with desired char
 	beq	end1		@If desired char found, branch to end
 	add	r0, #1		@If not found, move to next char in string
 	add	r2, #1		@If not found, increment index by 1, keep moving
