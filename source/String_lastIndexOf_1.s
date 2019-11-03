@@ -11,7 +11,7 @@ String_lastIndexOf_1:
         add     r4, r5                   @ Add to the string the length of string passed in
         
 loop:
-        ldrb    r6, [r4], #-1             @ Load into R5 the char from the string
+        ldrb    r6, [r4], #-1             @ Load into R6 the char from the string
         cmp     r6, r2                   @ Check if string values are equal
         beq     endLoop                  @ If equal, branch to end
         sub     r5, #1                   @ Decrement our index value
