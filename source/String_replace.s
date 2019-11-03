@@ -20,7 +20,7 @@ String_replace:
 
 replaceLoop:
 	cmp 	r5, #0
-	beq	b done
+	beq	done
         ldrb    r6, [r4], #1              @ Load first char from string1 into R5, increment our pointer
         cmp     r6, r2 
 	moveq	r6, r3
