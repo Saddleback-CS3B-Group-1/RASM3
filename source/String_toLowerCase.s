@@ -1,46 +1,33 @@
 	.global String_toLowerCase
-	.data
-	ptrStr: 	.word
-	.text
+	.extern malloc
 
 String_toLowerCase:
-	push {r4-r11, lr} 		@AACPS registers
-	push {r0}				@Preserve the passed string
-	ldr r0, [r0]				@Load string into register r0
-	bl String_length		@Must get the length of string
-	add r0, #1			@Add the null byte to our string
-	bl malloc				@Allocate memory for the string
-	ldr r4, =ptrStr			@Load address of pointer into R4
-	str r0, [r4]				@Save the memory address of r4 into r0
-	pop {r0}				@Restoring the string
-	push {r0}				@Preserve the pointer to the string
-	ldr r0, [r0]				@dereference string pointer
-	ldr r4, [r4]				@dereference pointer ptrStr
+			  push {r4-r11,lr}
+			  mov r4, r1
+			  bl String_length
+			  mov r6, r0
+			  add r0, #1
+			  bl malloc
+			  mov r1, r4
+			  mov r5, r0
+lower_loop:
+			  cmp r6, #0
+			  beq lower_loop_done
+			  mov r9, #0
+              		  ldrb r7, [r4], #1
+			  cmp r7, #65
+			  addge r9, #1
+			  cmp r7, #90
+			  addle r9, #1
+			  cmp r9, #2
+			  addeq r7, #32
+			  strb r7, [r5], #1
+			  sub r6, #1
+			  b lower_loop
 
-convertLoop:
-	ldrb r6, [r0], #1			@Increment pointer to traverse through array of characters
-	cmp r6, #0			@If char is null
-	beq freeLoop			@Branch if char is equal to null
-	cmp r6, #'A'			@Checking the ascii char is uppercase A
-	blt copy				@Branch if less than 
-	cmp r5, #'Z'			@Checking the ascii char is uppercase Z
-	bgt copy				@Branch if greater than
-	orr r5, #0x20			@lowercase convert
-copy:
-	strb r6, [r4], #1
-	b convertLoop
-
-LowerEnd:
-        strb    r6, [r4]                    @ Store null byte to end of our string
-	pop	{r0}				@ Restore string pointer
-	push	 {r0}				@Preserve the pointer to the string
-	ldr	r0, [r0]			@ Dereference string pointer
-	bl	free				@ Free up string pointer
-	pop	{r0}				@ Restore string pointer
-        ldr     r4, =ptrStrLower     @ Load our pointer into R1 for return
-        ldr     r4, [r4]                 	 @ Dereference the pointer for our return
-	str	r4, [r0]			 @ Save the memory of R4 into R0
-        pop  {r4-r11, lr}       		  @ Restore saved register contents
-        bx      lr                      	 @ Branch to calling program
-
-.end
+lower_loop_done:
+			  mov r8, #0
+			  strb r8, [r5]
+			  pop {r4-r11,lr}
+			  bx lr
+			  .end
