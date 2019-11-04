@@ -6,8 +6,10 @@ String_indexOf_3:
 	mov	r5, r2		@Move substring into R5
 	bl	String_length	@Branch to String_length
 	mov	r4, r0		@Move result of String_length into R4
-	mov	r0, r5		@Move substring into R0
+	mov r3, r1
+	mov	r1, r5		@Move substring into R0
 	bl	String_length	@Branch to String_length
+	mov r1, r3
 	mov	r5, r0		@Move result of String_length into R5
 	mov	r9, r2		@Move substring into R9
 	mov	r6, #0		@Move 0 into R6 for future calc.

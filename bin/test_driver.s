@@ -345,6 +345,18 @@ _start:
 
 @Part 15
 
+	ldr r1, =prompt_15
+	bl putstring
+	ldr r1, =ptr_s2
+	ldr r1, [r1]
+	ldr r2, =arg_15
+	bl String_indexOf_3
+	ldr r1, =int_string
+	bl intasc32
+	bl putstring	
+	ldr r1, =char_nL
+	bl putch
+
 @Part 16
 
 	ldr r1, =prompt_16
