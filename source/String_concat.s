@@ -28,7 +28,7 @@ loop1:
 bottom1:
 	mov r2, r9
 	mov r5, r10
-	@add r5, #1
+	add r5, #1
 
 loop2:
 	cmp  r5, #0		@Have we finished copying szValB?

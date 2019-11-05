@@ -45,6 +45,7 @@ prompt_22B: .asciz "String_concat(s1,s2) = "
    arg_13: .byte 'g'
    arg_19A: .byte 'a'
    arg_19B: .byte 'o'
+   arg_22: .asciz " "
      out_char: .byte 0
    			.text
 	  	    .global _start
@@ -439,18 +440,48 @@ _start:
 
 @Part 21
 	
-	ldr r1, =prompt_20
+	ldr r1, =prompt_21
 	bl putstring
 	ldr r1, =ptr_s1
 	ldr r1, [r1]
 	bl String_toUpperCase
+	mov r3, r1
 	mov r1, r0
 	bl putstring
+	ldr r1, =ptr_s1
+	str r0, [r1]
+	mov r0, r3
 	bl free
 	ldr r1, =char_nL
 	bl putch
 
 @Part 22
+
+	ldr r1, =prompt_22A
+	bl putstring
+	ldr r1, =char_nL
+	bl putch
+	ldr r1, =prompt_22B
+	bl putstring
+	ldr r1, =ptr_s1
+	ldr r1, [r1]
+	ldr r2, =arg_22
+	bl String_concat
+	mov r3, r1
+	ldr r1, =ptr_s1
+	str r0, [r1]
+	mov r0, r3
+	bl free
+	ldr r1, =ptr_s1
+	ldr r1, [r1]
+	ldr r2, =ptr_s2
+	ldr r2, [r2]
+	bl String_concat
+	mov r1, r0
+	bl putstring
+	bl free
+	ldr r1, =char_nL
+	bl putch
 
 terminate:
 		mov r11, #0
