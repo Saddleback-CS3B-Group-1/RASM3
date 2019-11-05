@@ -390,6 +390,18 @@ _start:
 
 @Part 18
 
+	ldr r1, =prompt_18
+	bl putstring
+	ldr r1, =ptr_s2
+	ldr r1, [r1]
+	ldr r2, =arg_15
+	bl String_lastIndexOf_3
+	ldr r1, =int_string
+	bl intasc32
+	bl putstring
+	ldr r1, =char_nL
+	bl putch
+
 @Part 19
 
 	ldr r1, =prompt_19
